@@ -1,61 +1,64 @@
-version: '3.8'
-
 services:
-  api1:
-    container_name: clever_montalcini
-    build:
-      context: ./api
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3000"
-    environment:
-      - PORT=3000
-    networks:
-      - app-network
-
-  api2:
-    container_name: condescending_davinci
-    build:
-      context: ./api
-      dockerfile: Dockerfile
+  api01:
+    container_name: api01
+    image: nmatsui/hello-world-api:0.1.1
     ports:
       - "3000:3000"
     environment:
-      - PORT=3000
+      - DB_HOST=db
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_PORT=${POSTGRES_PORT}
     networks:
       - app-network
 
-  api3:
-    container_name: api_extra_3
-    build:
-      context: ./api
-      dockerfile: Dockerfile
+  api02:
+    container_name: api02
+    image: nmatsui/hello-world-api:0.1.1
+    ports:
+      - "3001:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_PORT=${POSTGRES_PORT}
+    networks:
+      - app-network
+
+  api03:
+    container_name: api03
+    image: nmatsui/hello-world-api:0.1.1
     ports:
       - "3002:3000"
     environment:
-      - PORT=3000
+      - DB_HOST=db
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_PORT=${POSTGRES_PORT}
     networks:
       - app-network
 
   db:
-    image: postgres:latest
-    container_name: some-postgres
-    restart: always
+    container_name: db
+    image: postgres:13
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "${POSTGRES_PORT}:5432"
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - app-network
 
-volumes:
-  postgres_data:
-    driver: local
-
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
