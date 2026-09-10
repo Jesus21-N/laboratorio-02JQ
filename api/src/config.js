@@ -23,8 +23,8 @@ class Config {
         return port;
     }
     get message() {
-        return process.env.MESSAGE || this.DEFAULT_MESSAGE;
-    }
+    return 'Jesus Quinde';
+  }
     get logLevel() {
         let logLevel = process.env.LOG_LEVEL || this.DEFAULT_LOG_LEVEL;
         if (!logLevels.includes(logLevel.toLowerCase())) {

@@ -1,43 +1,46 @@
 services:
   api01:
     container_name: api01
-    image: nmatsui/hello-world-api:0.1.1
+    build: ./api
     ports:
       - "3000:3000"
     environment:
+      - MESSAGE=Jesus Quinde
       - DB_HOST=db
-      - DB_USER=${POSTGRES_USER}
-      - DB_PASSWORD=${POSTGRES_PASSWORD}
-      - DB_NAME=${POSTGRES_DB}
-      - DB_PORT=${POSTGRES_PORT}
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=db
+      - DB_PORT=5432
     networks:
       - app-network
 
   api02:
     container_name: api02
-    image: nmatsui/hello-world-api:0.1.1
+    build: ./api
     ports:
       - "3001:3000"
     environment:
+      - MESSAGE=Jesus Quinde
       - DB_HOST=db
-      - DB_USER=${POSTGRES_USER}
-      - DB_PASSWORD=${POSTGRES_PASSWORD}
-      - DB_NAME=${POSTGRES_DB}
-      - DB_PORT=${POSTGRES_PORT}
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=db
+      - DB_PORT=5432
     networks:
       - app-network
 
   api03:
     container_name: api03
-    image: nmatsui/hello-world-api:0.1.1
+    build: ./api
     ports:
       - "3002:3000"
     environment:
+      - MESSAGE=Jesus Quinde
       - DB_HOST=db
-      - DB_USER=${POSTGRES_USER}
-      - DB_PASSWORD=${POSTGRES_PASSWORD}
-      - DB_NAME=${POSTGRES_DB}
-      - DB_PORT=${POSTGRES_PORT}
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=db
+      - DB_PORT=5432
     networks:
       - app-network
 
@@ -47,9 +50,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
