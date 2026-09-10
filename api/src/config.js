@@ -11,7 +11,7 @@ const logLevels = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
 
 class Config {
     constructor() {
-        this.DEFAULT_MESSAGE = 'hello world!';
+        this.DEFAULT_MESSAGE = 'Jesus Quinde';
         this.DEFAULT_PORT = 3000;
         this.DEFAULT_LOG_LEVEL = 'info';
     }
